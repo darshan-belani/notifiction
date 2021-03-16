@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="{{url('admin/images/favicon.ico')}}" type="image/ico" />
+    <link rel="icon" href="{{url('admin/images/favicon.ico')}}" type="image/ico"/>
 
     <title>Notification | </title>
     <!-- Bootstrap -->
@@ -23,7 +23,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>POST</span></a>
+                    <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>POST</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
-                <br />
+                <br/>
                 <!-- sidebar menu -->
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                     <div class="menu_section">
@@ -47,7 +47,7 @@
                         <ul class="nav side-menu">
                             <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="index.html">Dashboard</a></li>
+                                    <li><a href="#">Dashboard</a></li>
                                     <li><a href="{{url('admin/posts')}}">Posts</a></li>
                                 </ul>
                             </li>
@@ -76,34 +76,35 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
-                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                               aria-expanded="false">
                                 <img src="{{url('admin/images/img.jpg')}}" alt="">{{auth()->user()->name}}
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                <li><a href="{{url('logout')}}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                <li><a href="{{url('logout')}}"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                </li>
                             </ul>
                         </li>
 
                         <li role="presentation" class="dropdown" onclick="markAsRead()">
-                            <a href="#" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                            <a href="#" class="dropdown-toggle info-number" data-toggle="dropdown"
+                               aria-expanded="false">
                                 <i class="fa fa-envelope-o"></i>
                                 <span class="badge bg-green">{{count(auth()->user()->unreadNotifications)}}</span>
                             </a>
-                            @foreach(auth()->user()->unreadNotifications as $notifincation)
-                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                                    <li>
-                                        <a>
-                                            <span>
-                                              <span>PostName</span> <br>
 
-                                              <span>{{$notifincation->data['name']}}</span>
-                                              <span class="time">{{$notifincation->created_at->diffForHumans()}}</span>
-                                            </span>
-                                        </a>
+                            <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+
+                                @foreach(auth()->user()->unreadNotifications as $notifincation)
+                                    <li>
+                                        <span>
+                                          <span>PostName : {{$notifincation->data['name']}}</span> <br>
+                                          <span class="time">{{$notifincation->created_at->diffForHumans()}}</span>
+                                        </span>
                                     </li>
-                                </ul>
-                            @endforeach
+                                @endforeach
+                            </ul>
                         </li>
                     </ul>
                 </nav>
@@ -112,10 +113,10 @@
         <!-- /top navigation -->
     </div>
     <main class="py-4">
-            @yield('content')
-        </main>
+        @yield('content')
+    </main>
     <!-- /page content -->
-    </div>
+</div>
 {{--<footer>
     <div class="pull-right">
         Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
