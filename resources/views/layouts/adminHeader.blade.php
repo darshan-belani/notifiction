@@ -47,8 +47,10 @@
                         <ul class="nav side-menu">
                             <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="#">Dashboard</a></li>
-                                    <li><a href="{{url('admin/posts')}}">Posts</a></li>
+                                    @if(auth()->user()->role == '1')
+                                    <li><a href="{{url('/users')}}">Users</a></li>
+                                    @endif
+                                    <li><a href="{{url('/posts')}}">Posts</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -75,6 +77,7 @@
                     </div>
 
                     <ul class="nav navbar-nav navbar-right">
+
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false">
@@ -86,26 +89,25 @@
                                 </li>
                             </ul>
                         </li>
-
-                        <li role="presentation" class="dropdown" onclick="markAsRead()">
-                            <a href="#" class="dropdown-toggle info-number" data-toggle="dropdown"
-                               aria-expanded="false">
-                                <i class="fa fa-envelope-o"></i>
-                                <span class="badge bg-green">{{count(auth()->user()->unreadNotifications)}}</span>
-                            </a>
-
-                            <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-
-                                @foreach(auth()->user()->unreadNotifications as $notifincation)
-                                    <li>
-                                        <span>
-                                          <span>PostName : {{$notifincation->data['name']}}</span> <br>
-                                          <span class="time">{{$notifincation->created_at->diffForHumans()}}</span>
-                                        </span>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </li>
+                        @if(auth()->user()->role == '1')
+                            <li role="presentation" class="dropdown" onclick="markAsRead()">
+                                <a href="#" class="dropdown-toggle info-number" data-toggle="dropdown"
+                                   aria-expanded="false">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="badge bg-green">{{count(auth()->user()->unreadNotifications)}}</span>
+                                </a>
+                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                    @foreach(auth()->user()->unreadNotifications as $notifincation)
+                                        <li>
+                                            <span>
+                                              <span>PostName : {{$notifincation->data['name']}}</span> <br>
+                                              <span class="time">{{$notifincation->created_at->diffForHumans()}}</span>
+                                            </span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endif
                     </ul>
                 </nav>
             </div>

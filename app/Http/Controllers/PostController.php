@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Notifications\TestNotification;
 use App\Posts;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -19,6 +20,34 @@ class PostController extends Controller
         try {
             $posts = Posts::get();
             return view('post.post', compact('posts'));
+        } catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getAllPost(Request $request)
+    {
+        try {
+            if (auth()->user()->role == '1') {
+                $getPostData = Posts::get();
+            } else {
+                $getPostData = Posts::where('user_id',\auth()->user()->id)->get();
+            }
+            $data = Datatables::of($getPostData)
+                ->addColumn('action', function ($getPostData) {
+                    return '<a href="' . url('/post/edit', $getPostData->id) . '" class="btn btn-sm btn-primary">
+                <i class="glyphicon glyphicon-edit"></i> Edit</a>
+                <a href="' . url('/post/delete', $getPostData->id) . '" class="btn btn-sm btn-danger">
+                <i class="glyphicon glyphicon-edit"></i> Delete</a>';
+                })
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
+            return $data;
         } catch (\Exception $ex) {
             Log::error($ex->getMessage());
         }
@@ -43,15 +72,16 @@ class PostController extends Controller
     public function store(Request $request)
     {
         try {
-            $user = auth()->user();
+            $user = User::where('role','1')->first();
             $addPost = new Posts();
             $addPost->name = $request->post_name;
             $addPost->description = $request->post_description;
+            $addPost->user_id = auth()->user()->id;
             if ($addPost->save()) {
                 $user->notify(new TestNotification(Posts::findOrFail($addPost->id)));
 
             }
-            return redirect('admin/posts');
+            return redirect('/posts');
         } catch (\Exception $ex) {
             Log::error($ex->getMessage());
         }
@@ -66,30 +96,6 @@ class PostController extends Controller
         try {
             auth()->user()->unreadNotifications->markAsRead();
             return redirect()->back();
-        } catch (\Exception $ex) {
-            Log::error($ex->getMessage());
-        }
-    }
-
-    /**
-     * @param Request $request
-     * @return mixed
-     */
-    public function getAllPost(Request $request)
-    {
-        try {
-            $getPostData = Posts::get();
-            $data = Datatables::of($getPostData)
-                ->addColumn('action', function ($getPostData) {
-                    return '<a href="' . url('/admin/post/edit', $getPostData->id) . '" class="btn btn-sm btn-primary">
-                <i class="glyphicon glyphicon-edit"></i> Edit</a>
-                <a href="' . url('/admin/post/delete', $getPostData->id) . '" class="btn btn-sm btn-danger">
-                <i class="glyphicon glyphicon-edit"></i> Delete</a>';
-                })
-                ->rawColumns(['action'])
-                ->addIndexColumn()
-                ->make(true);
-            return $data;
         } catch (\Exception $ex) {
             Log::error($ex->getMessage());
         }
@@ -121,7 +127,7 @@ class PostController extends Controller
             $updatePost->name = $request->post_name;
             $updatePost->description = $request->post_description;
             $updatePost->save();
-            return redirect('admin/posts');
+            return redirect('/posts');
         } catch (\Exception $ex) {
             Log::error($ex->getMessage());
         }

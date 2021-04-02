@@ -34,7 +34,7 @@
                                 <div class="x_title">
                                     <h2 style="margin: 14px 0px 0px 390px;font-weight: bolder;font-size: 35px;">Add Post</h2>
                                 </div>
-                                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{{url('/admin/post/store')}}">
+                                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{{url('/post/store')}}">
                                     <div class="x_content">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -52,7 +52,7 @@
                                             <div class="form-group">
                                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                                     <button type="submit" class="btn btn-success">Submit</button>
-                                                    <a href="{{url('/admin/posts')}}"> <button class="btn btn-primary" type="button">Cancel</button></a>
+                                                    <a href="{{url('/posts')}}"> <button class="btn btn-primary" type="button">Cancel</button></a>
                                                 </div>
                                             </div>
                                         </div>

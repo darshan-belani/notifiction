@@ -10,14 +10,17 @@
     <title>Gentelella Alela! | </title>
 
     <!-- Bootstrap -->
-    <link href="./vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{url('admin/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+    {{--<link href="./vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">--}}
     <!-- Font Awesome -->
-    <link href="./vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href= {{url('admin/vendors/font-awesome/css/font-awesome.min.css')}}"" rel="stylesheet">
+    {{--<link href="./vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">--}}
     <!-- Animate.css -->
-    <link href="./vendors/animate.css/animate.min.css" rel="stylesheet">
+    <link href="{{url('admin/vendors/animate.css/animate.min.css')}}" rel="stylesheet">
+    {{--<link href="./vendors/animate.css/animate.min.css" rel="stylesheet">--}}
 
     <!-- Custom Theme Style -->
-    <link href="./build/css/custom.min.css" rel="stylesheet">
+    <link href="{{url('admin/build/css/custom.min.css')}}" rel="stylesheet">
 </head>
 
 <body class="login">
@@ -40,14 +43,14 @@
                     <div>
                         <input type="submit" value="Log In" class="btn btn-default submit">
                         {{--<a class="btn btn-default submit" href="index.html">Log in</a>--}}
-                        <a class="reset_pass" href="#">Lost your password?</a>
+                        <a class="reset_pass" href="{{url('register')}}">Register Here</a>
                     </div>
                     <div class="clearfix"></div>
                 </form>
             </section>
         </div>
 
-        <div id="register" class="animate form registration_form">
+        {{--<div id="register" class="animate form registration_form">
             <section class="login_content">
                 <form>
                     <h1>Create Account</h1>
@@ -81,7 +84,7 @@
                     </div>
                 </form>
             </section>
-        </div>
+        </div>--}}
     </div>
 </div>
 </body>

@@ -19,20 +19,32 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/admin/signIn', 'UserController@signin');
+Route::get('/signIn', 'UserController@signin');
 Route::any('/log', 'UserController@log');
+Route::view('/register', 'sign_up');
+Route::any('/regist', 'UserController@regist');
 
 Route::group(['middleware' => ['login']], function () {
-//Route::get('/home', 'HomeController@index')->name('home');
-    Route::any('/admin/posts', 'PostController@index');
-    Route::get('/admin/getAllPost', 'PostController@getAllPost');
-    Route::any('/admin/posts/add', 'PostController@add');
-    Route::any('/admin/post/store', 'PostController@store');
-    Route::get('/admin/post/edit/{id}', 'PostController@editPost');
-    Route::get('/admin/post/update/{id}', 'PostController@updatePost');
-    Route::any('/admin/post/delete/{id}', 'PostController@deletePost');
+
+    // Post Route
+    Route::any('/posts', 'PostController@index');
+    Route::get('/getAllPost', 'PostController@getAllPost');
+    Route::any('/posts/add', 'PostController@add');
+    Route::any('/post/store', 'PostController@store');
+    Route::get('/post/edit/{id}', 'PostController@editPost');
+    Route::get('/post/update/{id}', 'PostController@updatePost');
+    Route::any('/post/delete/{id}', 'PostController@deletePost');
+
+    // Mark Read
     Route::any('/markRead', 'PostController@markRead');
+
+    // Logout
     Route::any('/logout', 'UserController@logout');
+
+    // Users Route
+    Route::any('/users', 'UserController@users');
+    Route::any('/getAllUsers', 'UserController@getAllUsers');
+    Route::any('/user/edit/{id}', 'UserController@userEdit');
+    Route::any('/user/update/{id}', 'UserController@userUpdate');
+    Route::any('/user/delete/{id}', 'UserController@userDelete');
 });
-
-
