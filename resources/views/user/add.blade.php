@@ -52,7 +52,15 @@
                                             <div class="form-group">
                                                 <label for="role" class="control-label col-md-3 col-sm-3 col-xs-12">Role</label>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input id="role" class="form-control col-md-7 col-xs-12" type="text" name="role" value="">
+                                                    <select class="form-control col-md-7 col-xs-12" name="role">
+                                                        <option> ---Select---</option>
+                                                        @foreach(config('config-variables.user_role') as $key => $value)
+                                                            <option id="role" value="{{$key}}"> {{ $value }} </option>
+                                                            {{--<option value="{{$key }}"> {{$value}} </option>--}}
+                                                        @endforeach
+                                                    </select>
+
+                                                    {{--<input id="role" class="form-control col-md-7 col-xs-12" type="text" name="role" value="">--}}
                                                 </div>
                                             </div>
                                             <div class="form-group">

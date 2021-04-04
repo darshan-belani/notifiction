@@ -108,6 +108,49 @@ class UserController extends Controller
         }
     }
 
+    /*public function userAdd()
+    {
+        try {
+            return view('user/add');
+        } catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+        }
+    }*/
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function userEdit($id)
+    {
+        try {
+            $editUser = User::where('id',$id)->first();
+            return view('user/edit',compact('editUser'));
+        } catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function userUpdate(Request $request, $id)
+    {
+        try {
+            $updateUser = User::where('id',$id)->first();
+            $updateUser->name = $request->name;
+            $updateUser->email = $request->email;
+            if ($request->role){
+                $updateUser->role = $request->role;
+            }
+            $updateUser->save();
+            return redirect('/users');
+        } catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+        }
+    }
+
     /**
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */

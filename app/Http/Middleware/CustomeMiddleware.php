@@ -17,7 +17,7 @@ class CustomeMiddleware
     public function handle($request, Closure $next)
     {
         if (Auth::guest()) {
-            return redirect('/admin/signIn')->with('warning', 'You have not login');
+            return redirect('/signIn')->with('warning', 'You have not login');
         } elseif (auth()->user() != null) {
             return $next($request);
         } else {

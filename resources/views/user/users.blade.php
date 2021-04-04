@@ -22,12 +22,12 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel" style="height: 55px;">
                                 <h3 align="center" style="font-weight: bold">Users</h3>
-                                    <div class="col-md-12" align="right">
+                                    {{--<div class="col-md-12" align="right">
                                         <a href="{{url('/user/add')}}" class="btn black custom-filter-submit"
                                            style="margin: -75px 0px 0px 0px;color: #000 !important;border-radius: 5px;background-color: #00b3ee;">
                                             Add
                                         </a>
-                                    </div>
+                                    </div>--}}
                                 </div>
                             </div>
                         </div>

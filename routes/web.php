@@ -44,6 +44,8 @@ Route::group(['middleware' => ['login']], function () {
     // Users Route
     Route::any('/users', 'UserController@users');
     Route::any('/getAllUsers', 'UserController@getAllUsers');
+    Route::any('/user/add', 'UserController@userAdd');
+//    Route::any('/user/store', 'UserController@userStore');
     Route::any('/user/edit/{id}', 'UserController@userEdit');
     Route::any('/user/update/{id}', 'UserController@userUpdate');
     Route::any('/user/delete/{id}', 'UserController@userDelete');
